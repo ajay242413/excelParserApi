@@ -1,0 +1,34 @@
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_import_data`(IN dataString LONGTEXT)
+BEGIN
+                    declare ID int;
+                    declare NAME varchar(50);
+                    declare IMAGES longtext;
+                    declare WIN float;
+                    declare counter int DEFAULT 0;
+					declare obj varchar(10000);
+                    declare length double;
+                    TRUNCATE TABLE `images`;
+
+
+                    set length = JSON_LENGTH(dataString);
+                    while(counter < length) do
+                      set obj = JSON_EXTRACT(dataString, CONCAT('$[', counter, ']'));
+
+                      set ID = JSON_UNQUOTE(JSON_EXTRACT(obj, '$.ID'));
+                      set NAME = JSON_UNQUOTE(JSON_EXTRACT(obj, '$.NAME'));
+                      set IMAGES = JSON_UNQUOTE(JSON_EXTRACT(obj, '$.IMAGES'));
+                      set WIN = JSON_UNQUOTE(JSON_EXTRACT(obj, '$.WIN'));
+
+
+                      Insert into images(ID,
+                      NAME,
+                      IMAGES,
+                      WIN) values
+                      (ID,
+                      NAME,
+                      IMAGES,
+                      WIN);
+                      set counter = counter + 1;
+                    end while;
+                END
