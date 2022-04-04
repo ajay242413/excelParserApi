@@ -14,14 +14,6 @@ const corsOptions = {
         'POST',
         'DELETE',
         'OPTIONS'
-    ],
-    allowedHeaders: [
-        'Authorization',
-        'Content-Type',
-        'Content-Length',
-        'User-Email',
-        'User-Hash',
-        'X-Requested-With'
     ]
 };
 
