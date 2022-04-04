@@ -23,4 +23,6 @@ Stored procedure is kept in text file names sp.txt
 # running the app
 
 run `npm install` to install node modules
+
+run `npm start` to start the app
  
